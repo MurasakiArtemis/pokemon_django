@@ -39,7 +39,10 @@ class Pokemon(models.Model):
     egg_groups = models.ManyToManyField(EggGroup)
     hatch_time = models.IntegerField()
     experience_yield = models.IntegerField()
-    gender_code = models.DecimalField()
+    gender_code = models.DecimalField(
+        decimal_places=4,
+        max_digits=4,
+    )
     catch_rate = models.IntegerField()
     introduced_generation = models.ForeignKey(
         Generation,
@@ -85,8 +88,14 @@ class Form(models.Model):
         through='FormType',
         related_name='forms',
     )
-    weight = models.DecimalField()
-    height = models.DecimalField()
+    weight = models.DecimalField(
+        decimal_places=2,
+        max_digits=5,
+    )
+    height = models.DecimalField(
+        decimal_places=2,
+        max_digits=5,
+    )
     pokemon = models.ForeignKey(
         Pokemon,
         on_delete=models.CASCADE,
@@ -102,15 +111,15 @@ class FormAbility(models.Model):
     form = models.ForeignKey(
         Form,
         on_delete=models.CASCADE,
-        related_name='form_types',
+        related_name='form_ability',
     )
     slot = models.CharField(
-        max_length=10,
+        max_length=2,
         choices=(
-            'First',
-            'Second',
-            'Hidden',
-            'Mega',
+            ('First', 'F'),
+            ('Second', 'S'),
+            ('Hidden', 'H'),
+            ('Mega', 'M'),
         ),
     )
 
@@ -126,9 +135,9 @@ class FormType(models.Model):
         related_name='form_types',
     )
     slot = models.CharField(
-        max_length=10,
+        max_length=2,
         choices=(
-            'Primary',
-            'Secondary',
+            ('Primary', 'P'),
+            ('Secondary', 'S'),
         ),
     )
