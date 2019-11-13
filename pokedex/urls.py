@@ -1,14 +1,14 @@
 from rest_framework import routers
-import views
+from . import views
 
 router = routers.DefaultRouter(trailing_slash=False)
 
 router.register(r'^ability', views.AbilityViewSet)
-router.register(r'^type', views.PokemonTypeSerializer)
-router.register(r'^egg_group', views.EggGroupSerializer)
-router.register(r'^generation', views.GenerationSerializer)
-router.register(r'^region', views.RegionSerializer)
-router.register(r'^pokemon', views.PokemonSerializer)
+router.register(r'^type', views.PokemonTypeViewSet)
+router.register(r'^egg_group', views.EggGroupViewSet)
+router.register(r'^generation', views.GenerationViewSet)
+router.register(r'^region', views.RegionViewSet)
+router.register(r'^pokemon', views.PokemonViewSet)
 
 urlpatterns = []
 urlpatterns += router.urls

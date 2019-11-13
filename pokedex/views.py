@@ -1,6 +1,5 @@
 from rest_framework import viewsets
-import models
-import serializers
+from . import models, serializers
 
 
 class AbilityViewSet(viewsets.ModelViewSet):
