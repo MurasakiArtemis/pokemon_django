@@ -24,6 +24,7 @@ SECRET_KEY = os.environ.get('secret_key')
 # Application definition
 
 INSTALLED_APPS = [
+    "django.contrib.contenttypes",
     "rest_framework",
     "pokedex",
 ]
@@ -35,6 +36,8 @@ REST_FRAMEWORK = {
         10,
     "DEFAULT_AUTHENTICATION_CLASSES": [],
     "DEFAULT_PERMISSION_CLASSES": [],
+    'UNAUTHENTICATED_USER':
+        None,
 }
 
 CORS_ORIGIN_ALLOW_ALL = True
