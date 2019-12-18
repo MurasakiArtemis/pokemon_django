@@ -1,5 +1,4 @@
 from django.db import models
-from django.contrib.postgres import fields as postgresql_fields
 
 
 class Ability(models.Model):
@@ -20,6 +19,7 @@ class Generation(models.Model):
 
 class Region(models.Model):
     name = models.CharField(max_length=20)
+    descriptor = models.CharField(max_length=10)
 
 
 class Pokemon(models.Model):
@@ -28,7 +28,6 @@ class Pokemon(models.Model):
     japanese_name = models.CharField(max_length=20)
     japanese_transliteration = models.CharField(max_length=50)
     japanese_romanized = models.CharField(max_length=50)
-    image_relative_link = models.CharField(max_length=500)
     has_mega = models.BooleanField()
     category = models.CharField(max_length=20)
     regional_numbers = models.ManyToManyField(
@@ -78,6 +77,7 @@ class MegaStonePicture(models.Model):
 class Form(models.Model):
     name = models.CharField(max_length=20)
     image_relative_link = models.CharField(max_length=500)
+    sprite_relative_link = models.CharField(max_length=500)
     abilities = models.ManyToManyField(
         Ability,
         through='FormAbility',
@@ -116,10 +116,10 @@ class FormAbility(models.Model):
     slot = models.CharField(
         max_length=2,
         choices=(
-            ('First', 'F'),
-            ('Second', 'S'),
-            ('Hidden', 'H'),
-            ('Mega', 'M'),
+            ('F', 'First'),
+            ('S', 'Second'),
+            ('H', 'Hidden'),
+            ('M', 'Mega'),
         ),
     )
 
@@ -137,7 +137,7 @@ class FormType(models.Model):
     slot = models.CharField(
         max_length=2,
         choices=(
-            ('Primary', 'P'),
-            ('Secondary', 'S'),
+            ('P', 'Primary'),
+            ('S', 'Secondary'),
         ),
     )
